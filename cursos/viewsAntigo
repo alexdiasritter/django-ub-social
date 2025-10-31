@@ -1,0 +1,32 @@
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Curso, Avaliacao
+from .serializers import CursoSerializer, AvaliacaoSerializer
+from django.http import HttpRequest, HttpResponse
+
+class CursoAPIView(APIView):
+    
+    def get(self, request: HttpRequest) -> HttpResponse:
+        cursos: Curso = Curso.objects.all()
+        serializer: CursoSerializer = CursoSerializer(cursos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request: HttpRequest) -> HttpResponse:
+        serializer: Curso = CursoSerializer(data=request.data) # pega os dados da requisição e serializa pra um objeto
+        serializer.is_valid(raise_exception=True) # retorna 400 automaticamente
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED) 
+        
+class AvaliacaoAPIView(APIView):
+    
+    def get(self, request: HttpRequest) -> HttpResponse:
+        avaliacoes: Avaliacao = Avaliacao.objects.all()
+        serializer: AvaliacaoSerializer = AvaliacaoSerializer(avaliacoes, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request: HttpRequest) -> HttpResponse:
+        serializer: Avaliacao = AvaliacaoSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True) # retorna 400 automaticamente
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
