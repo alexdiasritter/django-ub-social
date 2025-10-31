@@ -1,0 +1,47 @@
+# Ambiente virtual
+venv/
+.env/
+*.env
+
+# Arquivos do Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Configurações locais
+*.sqlite3
+db.sqlite3
+
+# Logs
+*.log
+
+# Cache e arquivos temporários
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.mo
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Diretórios de cache
+.cache/
+.pytest_cache/
+.mypy_cache/
+coverage/
+
+# Arquivos do Django
+/static/
+media/
+
+# VS Code
+.vscode/
+
+# Arquivos do sistema
+.idea/
+*.bak
+*.orig
